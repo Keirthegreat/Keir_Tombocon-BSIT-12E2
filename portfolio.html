@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio | Keir Tombocon</title>
+  <link rel="stylesheet" href="css/portfolio.css" />
+</head>
+<body>
+
+  <script src="/js/shadowdom.js"></script>
+  <script src="/js/loadnavbar.js"></script>
+
+  </header>
+  <main id="main-content" role="main">
+    <h1>My Projects</h1>
+    <nav aria-label="Project filters">
+      <ul class="filters">
+        <li><button onclick="filterProjects('web')">Web Apps</button></li>
+      </ul>
+    </nav>
+    <section class="projects-grid">
+      <article class="project-card" data-category="web">
+        <img src="images/dormhub-thumb.png" alt="DormHub platform screenshot" />
+        <h2>DormHub</h2>
+        <p>Platform for finding student accommodations.</p>
+        <a href="project-dormhub.html">View Details →</a>
+      </article>
+      <!-- More project cards... -->
+    </section>
+    
+  </main>
+  <footer role="contentinfo">
+    <p>&copy; 2025 Keir Stephan Tombocon</p>
+    <p>Designed by TOMBOCON, KEIR STEPHAN &ndash; BSIT-2A</p>
+  </footer>
+  <script src="js/portfolio.js"></script>
+</body>
+</html>
