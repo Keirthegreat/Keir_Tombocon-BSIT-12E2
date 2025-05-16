@@ -7,23 +7,42 @@
   <link rel="icon" type="image/png" href="T-favicon.ico" />
   <link rel="stylesheet" href="css/contact.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>emailjs.init('V_b0sTtm8-3UbqiFs');</script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <link rel="preload"
+        as="image"
+        href="https://img.icons8.com/fluency-systems-filled/48/007bff/filled-paper-plane.png"
+        crossorigin>
+        
+  <style>
+    body { font-family: Arial, sans-serif; padding: 0; margin: 0; }
+    main { max-width: 600px; margin: 2rem auto; padding: 1rem; }
+    form div { margin-bottom: 1rem; }
+    label { display: block; margin-bottom: .5rem; }
+    input, textarea, button { width: 100%; padding: .75rem; box-sizing: border-box; }
+    button { background-color: #007bff; color: #fff; border: none; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    @media (max-width: 480px) {
+      h1 { font-size: 1.5rem; }
+    }
+  </style>
 </head>
 <body>
-  
   <script src="/js/shadowdom.js"></script>
   <script src="/js/loadnavbar.js"></script>
 
-  </header>
   <main id="main-content" role="main">
-    <h1>Get in Touch With Me </h1>
-    <form action="https://formspree.io/f/your-form-id" method="POST">
+    <h1>Get in Touch With Me</h1>
+    <form id="contact-form">
       <div>
         <label for="name">Name</label>
-        <input id="name" name="name" type="text" required />
+        <input id="name" name="from_name" type="text" required />
       </div>
       <div>
         <label for="email">Email</label>
-        <input id="email" name="email" type="email" required />
+        <input id="email" name="reply_to" type="email" value="kiersteph@gmail.com" required />
       </div>
       <div>
         <label for="message">Message</label>
@@ -34,14 +53,13 @@
     <section>
       <h2>Other Ways to Reach Me</h2>
       <ul>
-        <li>Email: <a href="https://mail.google.com/mail/u/0/#sent?compose=GTvVlcSKkVNRwWxDqmKxJXCBVZtGZfkVzMccRkGzrvfZrBPgBqHhjSqfhQZCfSrkFhSpnBxMxvKsq">kiersteph@gmail.com</a></li>
+        <li>Email: <a href="mailto:kiersteph@gmail.com">kiersteph@gmail.com</a></li>
         <li>Location: Imus Cavite, Philippines</li>
       </ul>
     </section>
-   
   </main>
 
-   <footer role="contentinfo">
+  <footer role="contentinfo">
     <div class="footer-content">
       <p>&copy; 2025 Keir Stephan Tombocon</p>
       <p>Designed by TOMBOCON, KEIR STEPHAN &ndash; BSIT-12E2</p>

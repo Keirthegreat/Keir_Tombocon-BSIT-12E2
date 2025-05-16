@@ -1,4 +1,4 @@
-/* 1. GLOBAL RESET & BASE STYLES */
+
 * {
   margin: 0;
   padding: 0;
@@ -39,7 +39,7 @@ body {
   animation: pageLoad 0.7s ease-out forwards;
 }
 
-/* 2. TYPOGRAPHY */
+
 h1, h2, h3 {
   font-weight: 700;
   text-align: center;
@@ -85,7 +85,6 @@ p {
   color: var(--text-main);
 }
 
-/* 3. LAYOUT COMPONENTS */
 main {
   flex: 1;
   padding: 2.5rem 2rem;
@@ -117,7 +116,7 @@ main::before {
   padding: 0 1.5rem;
 }
 
-/* 4. FORM ELEMENTS */
+
 form {
   display: flex;
   flex-direction: column;
@@ -203,7 +202,7 @@ button[type="submit"]::after {
   animation: ripple 1s ease-out infinite;
 }
 
-/* 5. SECTION STYLES */
+
 section {
   margin: 2rem 0;
   padding: 1rem 0;
@@ -265,7 +264,7 @@ section ul li a:hover::after {
   transform: scaleX(1);
 }
 
-/* 7. RESPONSIVE BREAKPOINTS */
+
 @media (max-width: 768px) {
   html {
     font-size: 15px;
@@ -308,7 +307,7 @@ section ul li a:hover::after {
   }
 }
 
-/* 8. ANIMATIONS */
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -423,42 +422,6 @@ section ul li a:hover::after {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Footer Styles */
 footer {
   background: linear-gradient(135deg, #1a1a1a, #333);
   color: #fff;

@@ -1,6 +1,4 @@
-/* ==========================================
-   Global Reset
-   ========================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -24,9 +22,7 @@ body {
   font-size: 16px;
 }
 
-/* ==========================================
-   Base Typography & Layout
-   ========================================== */
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   color: #222;
@@ -80,7 +76,7 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
-/* Tags and time styling */
+
 .tag {
   display: inline-block;
   padding: 0.4rem 1rem;
@@ -108,9 +104,7 @@ time {
   position: relative;
 }
 
-/* ==========================================
-   Reusable Component Styles
-   ========================================== */
+
 a {
   color: #0066cc;
   text-decoration: none;
@@ -151,7 +145,7 @@ img:hover {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-/* Main content layout */
+
 #main-content {
   flex: 1;
   padding: 3rem 1.5rem;
@@ -161,7 +155,7 @@ img:hover {
   z-index: 1;
 }
 
-/* Article styling */
+
 .blog-post {
   background: #fff;
   padding: 3rem;
@@ -184,10 +178,7 @@ img:hover {
   background: linear-gradient(to right, #0066cc, #4da6ff);
 }
 
-/* ==========================================
-   Section-Specific Layouts
-   ========================================== */
-/* Post header styling */
+
 .post-header {
   margin-bottom: 2.5rem;
   position: relative;
@@ -204,7 +195,7 @@ img:hover {
   font-size: 0.95rem;
 }
 
-/* Post content styling */
+
 .post-content {
   position: relative;
   opacity: 0;
@@ -231,7 +222,7 @@ img:hover {
   color: #0066cc;
 }
 
-/* Post footer styling */
+
 .post-footer {
   margin-top: 3rem;
   padding-top: 1.5rem;
@@ -249,10 +240,7 @@ img:hover {
   margin-bottom: 0.6rem;
 }
 
-/* ==========================================
-   Additional Styles & Utilities
-   ========================================== */
-/* Font loading optimization */
+
 @font-face {
   font-family: 'Inter';
   font-style: normal;
@@ -271,7 +259,7 @@ img:hover {
        url('https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiA.woff2') format('woff2');
 }
 
-/* Print styles */
+
 @media print {
   body {
     background-color: #fff;
@@ -294,9 +282,7 @@ img:hover {
   }
 }
 
-/* ==========================================
-   Responsive Breakpoints
-   ========================================== */
+
 @media screen and (max-width: 768px) {
   #main-content {
     padding: 2rem 1rem;
@@ -345,9 +331,7 @@ img:hover {
   }
 }
 
-/* ==========================================
-   Advanced Animations and Effects
-   ========================================== */
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -370,7 +354,7 @@ img:hover {
   100% { background-position: 0% 50%; }
 }
 
-/* Background animated gradient */
+
 body::before {
   content: '';
   position: fixed;
@@ -392,21 +376,21 @@ body::before {
   100% { background-position: 0% 50%; }
 }
 
-/* Smooth hover effect for the whole blog post */
+
 .blog-post:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
   transition: all 0.4s ease;
 }
 
-/* Enhanced focus states for accessibility */
+
 :focus {
   outline: 3px solid rgba(0, 102, 204, 0.5);
   outline-offset: 3px;
   transition: outline-offset 0.2s ease;
 }
 
-/* Add a subtle transition to all elements */
+
 * {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
@@ -438,15 +422,7 @@ body::before {
 }
 
 .post-image img:hover {
-  transform: scale(1.02); /* Slight zoom on hover */
-}
-
-/* For smaller screens, make image slightly bigger proportionally */
-@media (max-width: 768px) {
-  .post-image img {
-    max-width: 90%;
-    width: 320px;
-  }
+  transform: scale(1.02); 
 }
 
 
@@ -467,7 +443,9 @@ body::before {
 
 
 
-/* Footer Styles with modern look */
+
+
+
 footer {
   background: linear-gradient(135deg, #1a1a1a, #333);
   color: #fff;

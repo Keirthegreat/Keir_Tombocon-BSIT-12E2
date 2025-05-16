@@ -7,32 +7,64 @@
   <link rel="icon" type="image/png" href="T-favicon.ico" />
   <link rel="stylesheet" href="css/resume.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  integrity="sha512-pap5Xcg2KI3+7p+QkHzgfI1n3W+9J/ba5dlG+yj5tGLh9paOg2ykNMpoytCdPav+Z2cghqQY3Tf6X7zrfZgdAA=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+
+
+
 </head>
 <body>
-
   <script src="/js/shadowdom.js"></script>
   <script src="/js/loadnavbar.js"></script>
-
-  </header>
+  
   <main id="main-content" role="main">
-    <section id="download-cv">
-      <a href="assets/Keir_Tombocon_CV.pdf" download class="btn">Download Tombocon_Resume PDF</a>
+    <section id="resume-header">
+      <h1>My Resume</h1>
+      <div class="resume-image-container" id="resumeImage">
+        <img src="IMG/Resume_tombocon.png" alt="Keir Tombocon Resume" />
+        <div class="resume-image-overlay">
+          <span class="view-full-btn"><i class="fas fa-search-plus"></i> View Full Resume</span>
+        </div>
+      </div>
     </section>
+    
+    <section id="download-cv"> <a
+    id="download-resume"
+    href="assets/Resume_tombocon.pdf"
+    download
+    class="btn"
+  >
+    Download Tombocon_Resume PDF
+  </a>
+</section>
+
+    
     <section id="education">
       <h1>Education</h1>
       <ul>
         <li><strong>B.S. Information Technology</strong>, NCST, 2024–2027 (expected)</li>
-        <li><strong>Masters Degree Bussiness Administration</strong>, Mapua, 2028–2030 (expected)</li>
+        <li><strong>Masters Degree Business Administration</strong>, Mapua, 2028–2030 (expected)</li>
       </ul>
     </section>
+    
     <section id="experience">
       <h1>Experience</h1>
       <ul>
         <li><strong>CEO &amp; Founder</strong>, Nutrifitliving | May 2025–Present</li>
         <li><strong>Co-founder</strong>, DormHub | Jan 2025–Present</li>
-        <li><strong>Web Developer Intern</strong>, Google Phillipines | Jun–Aug 2025</li>
+        <li><strong>Web Developer Intern</strong>, Google Philippines | Jun–Aug 2025</li>
       </ul>
     </section>
+    
     <section id="achievements">
       <h1>Key Achievements</h1>
       <ul>
@@ -41,16 +73,28 @@
         <li>IT Top Student</li>
       </ul>
     </section>
+    
     <section id="extracurriculars">
       <h1>Extracurriculars</h1>
       <ul>
-        <li>Interned as a programmer in google developers Mapua </li>
-        <li>Studied at Cisco Networking,Meralco foundation Ortigas Manila </li>
+        <li>Interned as a programmer in Google Developers Mapua</li>
+        <li>Studied at Cisco Networking, Meralco Foundation Ortigas Manila</li>
       </ul>
     </section>
-    
   </main>
+  
 
+  <div class="fullscreen-modal" id="resumeModal">
+    <div class="fullscreen-content">
+      <div class="close-modal" id="closeModal"><i class="fas fa-times"></i></div>
+      <img src="IMG/Resume_tombocon.png" alt="Keir Tombocon Resume" id="fullscreenImage" />
+      <div class="zoom-controls">
+        <div class="zoom-btn" id="zoomIn"><i class="fas fa-search-plus"></i></div>
+        <div class="zoom-btn" id="zoomOut"><i class="fas fa-search-minus"></i></div>
+      </div>
+    </div>
+  </div>
+  
   <footer role="contentinfo">
     <div class="footer-content">
       <p>&copy; 2025 Keir Stephan Tombocon</p>
@@ -60,7 +104,81 @@
       </div>
     </div>
   </footer>
-
-  <script src="js/resume.js"></script>
+  
+  <script>
+ 
+    const resumeImage = document.getElementById('resumeImage');
+    const resumeModal = document.getElementById('resumeModal');
+    const closeModal = document.getElementById('closeModal');
+    const fullscreenImage = document.getElementById('fullscreenImage');
+    const zoomIn = document.getElementById('zoomIn');
+    const zoomOut = document.getElementById('zoomOut');
+    
+    let scale = 1;
+    
+    resumeImage.addEventListener('click', () => {
+      resumeModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      scale = 1;
+      fullscreenImage.style.transform = `scale(${scale})`;
+    });
+    
+    closeModal.addEventListener('click', () => {
+      resumeModal.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+    
+    zoomIn.addEventListener('click', () => {
+      scale += 0.1;
+      if (scale > 2) scale = 2;
+      fullscreenImage.style.transform = `scale(${scale})`;
+    });
+    
+    zoomOut.addEventListener('click', () => {
+      scale -= 0.1;
+      if (scale < 0.5) scale = 0.5;
+      fullscreenImage.style.transform = `scale(${scale})`;
+    });
+    
+   
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
+        resumeModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+  
+    resumeModal.addEventListener('click', (e) => {
+      if (e.target === resumeModal) {
+        resumeModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+    
+  
+    const sections = document.querySelectorAll('section');
+    
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    sections.forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+  
+  <script src="js/sweetalert_download.js"></script>
 </body>
 </html>
