@@ -352,19 +352,16 @@ class NavbarComponent extends HTMLElement {
   updateActiveLink() {
     const currentLocation = window.location.href;
     console.log('Current location:', currentLocation);
-    
-    // Get all page links
+
     const navLinks = this.shadowRoot.querySelectorAll('.nav-links li');
-    
-    // Reset all active states first
+
     navLinks.forEach(li => li.classList.remove('active'));
-    
-    // Find which link matches the current URL
+
     let currentPageName = '';
     
-    // Extract the page name from the URL (handles both local and GitHub Pages URLs)
+  
     if (currentLocation.includes('.html')) {
-      // If the URL contains .html
+    
       const urlParts = currentLocation.split('/');
       for (let i = urlParts.length - 1; i >= 0; i--) {
         if (urlParts[i].includes('.html')) {
@@ -373,20 +370,20 @@ class NavbarComponent extends HTMLElement {
         }
       }
     } else {
-      // If no .html, check if it ends with a slash or is the root
+    
       if (currentLocation.endsWith('/') || 
           currentLocation.endsWith('.io') || 
           currentLocation.split('/').pop() === '') {
         currentPageName = 'index.html';
       } else {
-        // Otherwise use the last part of the URL
+       
         currentPageName = currentLocation.split('/').pop().toLowerCase() + '.html';
       }
     }
     
     console.log('Detected current page name:', currentPageName);
     
-    // If we couldn't determine a page, default to home
+   
     if (!currentPageName) {
       currentPageName = 'index.html';
     }
@@ -404,9 +401,9 @@ class NavbarComponent extends HTMLElement {
       }
     });
     
-    // For GitHub Pages and other special cases
+
     if (!this.shadowRoot.querySelector('.nav-links li.active')) {
-      // Special handling for root URL
+
       if (window.location.pathname === '/' || 
           window.location.pathname === '' ||
           window.location.pathname.endsWith('/')) {
@@ -416,7 +413,7 @@ class NavbarComponent extends HTMLElement {
           console.log('Activated home link as fallback');
         }
       } else {
-        // Try matching just the filename part
+       
         const pathParts = window.location.pathname.split('/');
         const lastPathPart = pathParts[pathParts.length - 1].toLowerCase();
         
@@ -462,7 +459,7 @@ window.addEventListener('DOMContentLoaded', () => {
     document.body.insertBefore(nav, document.body.firstChild);
   }
   
-  // Initial navigation update
+ 
   setTimeout(() => {
     const navbar = document.querySelector('navbar-component');
     if (navbar) {
@@ -471,7 +468,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }, 100);
 });
 
-// Add a global script to force update active links if page loads after component
+
 window.addEventListener('load', () => {
   setTimeout(() => {
     const navbar = document.querySelector('navbar-component');
@@ -481,7 +478,7 @@ window.addEventListener('load', () => {
   }, 500);
 });
 
-// Handle navigation events
+
 window.addEventListener('hashchange', () => {
   const navbar = document.querySelector('navbar-component');
   if (navbar) {
