@@ -31,6 +31,9 @@ class NavbarComponent extends HTMLElement {
     setTimeout(() => this.adjustBodyPadding(), 200);
     
     this.updateActiveLink();
+    
+    window.addEventListener('hashchange', this.updateActiveLink.bind(this));
+    window.addEventListener('popstate', this.updateActiveLink.bind(this));
   }
 
   disconnectedCallback() {
@@ -41,6 +44,8 @@ class NavbarComponent extends HTMLElement {
     
     window.removeEventListener('resize', this._boundAdjustBodyPadding);
     window.removeEventListener('load', this._boundAdjustBodyPadding);
+    window.removeEventListener('hashchange', this.updateActiveLink.bind(this));
+    window.removeEventListener('popstate', this.updateActiveLink.bind(this));
     
     document.body.classList.remove('has-navbar');
   }
@@ -345,55 +350,88 @@ class NavbarComponent extends HTMLElement {
   }
 
   updateActiveLink() {
-    let path = window.location.pathname;
+    const currentLocation = window.location.href;
+    console.log('Current location:', currentLocation);
     
-    const repoName = this.getRepositoryName();
-    if (repoName) {
-      const repoPrefix = '/' + repoName;
-      if (path.startsWith(repoPrefix)) {
-        path = path.substring(repoPrefix.length);
+    // Get all page links
+    const navLinks = this.shadowRoot.querySelectorAll('.nav-links li');
+    
+    // Reset all active states first
+    navLinks.forEach(li => li.classList.remove('active'));
+    
+    // Find which link matches the current URL
+    let currentPageName = '';
+    
+    // Extract the page name from the URL (handles both local and GitHub Pages URLs)
+    if (currentLocation.includes('.html')) {
+      // If the URL contains .html
+      const urlParts = currentLocation.split('/');
+      for (let i = urlParts.length - 1; i >= 0; i--) {
+        if (urlParts[i].includes('.html')) {
+          currentPageName = urlParts[i].toLowerCase();
+          break;
+        }
+      }
+    } else {
+      // If no .html, check if it ends with a slash or is the root
+      if (currentLocation.endsWith('/') || 
+          currentLocation.endsWith('.io') || 
+          currentLocation.split('/').pop() === '') {
+        currentPageName = 'index.html';
+      } else {
+        // Otherwise use the last part of the URL
+        currentPageName = currentLocation.split('/').pop().toLowerCase() + '.html';
       }
     }
     
-    if (path === '/' || path === '') {
-      path = '/index.html';
+    console.log('Detected current page name:', currentPageName);
+    
+    // If we couldn't determine a page, default to home
+    if (!currentPageName) {
+      currentPageName = 'index.html';
     }
     
-    const filename = path.split('/').pop().toLowerCase();
-    
-    console.log('Current path detected:', path);
-    console.log('Active file:', filename);
-    
-    this.shadowRoot.querySelectorAll('.nav-links li').forEach(li => {
+    // Find and activate the matching link
+    navLinks.forEach(li => {
       const anchor = li.querySelector('a');
       const href = anchor.getAttribute('href').toLowerCase();
       
-      const isActive = (href === filename) || 
-                      (filename === 'index.html' && href === '') ||
-                      (filename === '' && href === 'index.html');
-                      
-      li.classList.toggle('active', isActive);
-      
-      console.log(`Link: ${href}, Active: ${isActive}`);
-    });
-  }
-
-  getRepositoryName() {
-    const hostname = window.location.hostname;
-    const pathname = window.location.pathname;
-    
-    if (!hostname.includes('github.io')) {
-      return null;
-    }
-    
-    if (hostname.split('.')[0] + '.github.io' === hostname) {
-      if (!pathname.includes('/')) {
-        return null;
+      if (currentPageName === href || 
+         (currentPageName === 'index.html' && href === '') ||
+         (currentPageName === '' && href === 'index.html')) {
+        li.classList.add('active');
+        console.log(`Activated link: ${href}`);
       }
-      return pathname.split('/')[1];
-    }
+    });
     
-    return pathname.split('/')[1];
+    // For GitHub Pages and other special cases
+    if (!this.shadowRoot.querySelector('.nav-links li.active')) {
+      // Special handling for root URL
+      if (window.location.pathname === '/' || 
+          window.location.pathname === '' ||
+          window.location.pathname.endsWith('/')) {
+        const homeLink = this.shadowRoot.querySelector('.nav-links li a[href="index.html"]');
+        if (homeLink) {
+          homeLink.parentElement.classList.add('active');
+          console.log('Activated home link as fallback');
+        }
+      } else {
+        // Try matching just the filename part
+        const pathParts = window.location.pathname.split('/');
+        const lastPathPart = pathParts[pathParts.length - 1].toLowerCase();
+        
+        navLinks.forEach(li => {
+          const anchor = li.querySelector('a');
+          const href = anchor.getAttribute('href').toLowerCase();
+          
+          if (lastPathPart === href || 
+             (lastPathPart === '' && href === 'index.html')) {
+            li.classList.add('active');
+            console.log(`Activated link based on path part: ${href}`);
+          }
+        });
+      }
+    }
   }
 
   adjustBodyPadding() {
@@ -424,10 +462,36 @@ window.addEventListener('DOMContentLoaded', () => {
     document.body.insertBefore(nav, document.body.firstChild);
   }
   
+  // Initial navigation update
   setTimeout(() => {
     const navbar = document.querySelector('navbar-component');
     if (navbar) {
       navbar.updateActiveLink();
     }
   }, 100);
+});
+
+// Add a global script to force update active links if page loads after component
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const navbar = document.querySelector('navbar-component');
+    if (navbar) {
+      navbar.updateActiveLink();
+    }
+  }, 500);
+});
+
+// Handle navigation events
+window.addEventListener('hashchange', () => {
+  const navbar = document.querySelector('navbar-component');
+  if (navbar) {
+    navbar.updateActiveLink();
+  }
+});
+
+window.addEventListener('popstate', () => {
+  const navbar = document.querySelector('navbar-component');
+  if (navbar) {
+    navbar.updateActiveLink();
+  }
 });
