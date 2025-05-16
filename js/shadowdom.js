@@ -345,12 +345,12 @@ class NavbarComponent extends HTMLElement {
   }
 
   updateActiveLink() {
-    const path = window.location.pathname.split('/').pop() || 'index.html';
-    this.shadowRoot.querySelectorAll('.nav-links li').forEach(li => {
-      const href = li.querySelector('a').getAttribute('href');
-      li.classList.toggle('active', href === path);
-    });
-  }
+  const path = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  this.shadowRoot.querySelectorAll('.nav-links li').forEach(li => {
+    const href = li.querySelector('a').getAttribute('href').toLowerCase();
+    li.classList.toggle('active', href === path);
+  });
+}
 
   adjustBodyPadding() {
     const header = this.shadowRoot.querySelector('.navbar-header');
