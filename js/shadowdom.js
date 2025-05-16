@@ -345,12 +345,56 @@ class NavbarComponent extends HTMLElement {
   }
 
   updateActiveLink() {
-  const path = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
-  this.shadowRoot.querySelectorAll('.nav-links li').forEach(li => {
-    const href = li.querySelector('a').getAttribute('href').toLowerCase();
-    li.classList.toggle('active', href === path);
-  });
-}
+    let path = window.location.pathname;
+    
+    const repoName = this.getRepositoryName();
+    if (repoName) {
+      const repoPrefix = '/' + repoName;
+      if (path.startsWith(repoPrefix)) {
+        path = path.substring(repoPrefix.length);
+      }
+    }
+    
+    if (path === '/' || path === '') {
+      path = '/index.html';
+    }
+    
+    const filename = path.split('/').pop().toLowerCase();
+    
+    console.log('Current path detected:', path);
+    console.log('Active file:', filename);
+    
+    this.shadowRoot.querySelectorAll('.nav-links li').forEach(li => {
+      const anchor = li.querySelector('a');
+      const href = anchor.getAttribute('href').toLowerCase();
+      
+      const isActive = (href === filename) || 
+                      (filename === 'index.html' && href === '') ||
+                      (filename === '' && href === 'index.html');
+                      
+      li.classList.toggle('active', isActive);
+      
+      console.log(`Link: ${href}, Active: ${isActive}`);
+    });
+  }
+
+  getRepositoryName() {
+    const hostname = window.location.hostname;
+    const pathname = window.location.pathname;
+    
+    if (!hostname.includes('github.io')) {
+      return null;
+    }
+    
+    if (hostname.split('.')[0] + '.github.io' === hostname) {
+      if (!pathname.includes('/')) {
+        return null;
+      }
+      return pathname.split('/')[1];
+    }
+    
+    return pathname.split('/')[1];
+  }
 
   adjustBodyPadding() {
     const header = this.shadowRoot.querySelector('.navbar-header');
@@ -379,4 +423,11 @@ window.addEventListener('DOMContentLoaded', () => {
     const nav = document.createElement('navbar-component');
     document.body.insertBefore(nav, document.body.firstChild);
   }
+  
+  setTimeout(() => {
+    const navbar = document.querySelector('navbar-component');
+    if (navbar) {
+      navbar.updateActiveLink();
+    }
+  }, 100);
 });
