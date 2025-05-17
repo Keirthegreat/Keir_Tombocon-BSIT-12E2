@@ -27,18 +27,20 @@ body {
   background-color: var(--bg-light);
   color: var(--text-main);
   line-height: 1.6;
+  background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
 
 .container {
   max-width: 1000px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px 20px 40px;
 }
 
 .title-container {
   text-align: center;
   margin-bottom: 30px;
-  padding: 25px 0;
+  padding: 35px 0;
+  position: relative;
 }
 
 .title-container h1 {
@@ -50,7 +52,7 @@ body {
   -webkit-text-fill-color: transparent;
   position: relative;
   display: inline-block;
-  padding: 12px 20px;
+  padding: 12px 30px;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
   animation: fadeInScale 0.8s ease-out;
@@ -64,11 +66,23 @@ body {
 .faq {
   background: var(--bg-white);
   border-radius: var(--border-radius-md);
-  padding: 30px;
-  margin-bottom: 30px;
+  padding: 35px;
+  margin-bottom: 40px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-light);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.faq::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--primary), var(--primary-light));
 }
 
 .faq:hover {
@@ -79,8 +93,8 @@ body {
 .faq h2 {
   font-size: 1.5rem;
   color: var(--text-dark);
-  margin-bottom: 10px;
-  padding-left: 25px;
+  margin-bottom: 12px;
+  padding-left: 28px;
   position: relative;
   transition: color var(--transition-normal);
 }
@@ -92,59 +106,88 @@ body {
   position: absolute;
   left: 0;
   color: var(--primary);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .faq h2:hover {
   color: var(--primary-light);
+  transform: translateX(5px);
 }
 
 .faq p {
   font-size: 1rem;
   color: var(--text-light);
-  margin-bottom: 20px;
-  padding-left: 25px;
+  margin-bottom: 25px;
+  padding-left: 28px;
   opacity: 0;
   animation: fadeIn 0.5s ease forwards;
   animation-delay: 0.2s;
+  line-height: 1.7;
 }
 
 .tech-stack {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 30px;
+  gap: 30px;
+  margin: 0 auto 40px;
   flex-wrap: wrap;
+  max-width: 800px;
 }
 
 .tech-item {
   background: var(--bg-white);
   border-radius: var(--border-radius-sm);
-  padding: 15px;
+  padding: 18px;
   box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.tech-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  transition: all 0.3s ease;
+  z-index: -1;
 }
 
 .tech-item:hover {
-  transform: translateY(-5px) scale(1.05);
+  transform: translateY(-8px) scale(1.05);
   box-shadow: var(--shadow-md);
 }
 
+.tech-item:hover::before {
+  height: 100%;
+  opacity: 0.1;
+}
+
 .tech-item img {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 0.25rem;
+  transition: all 0.3s ease;
+}
+
+.tech-item:hover img {
+  transform: scale(1.1);
 }
 
 .music-player {
   text-align: center;
-  margin-bottom: 30px;
+  margin: 0 auto 30px;
   background: var(--bg-white);
   border-radius: var(--border-radius-md);
   padding: 25px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-light);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  max-width: 600px;
 }
 
 .music-player:hover {
@@ -161,6 +204,7 @@ body {
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  padding: 0 10px;
 }
 
 .music-player h2::before {
@@ -179,26 +223,39 @@ body {
   width: 100%;
   max-width: 500px;
   border-radius: var(--border-radius-sm);
-  padding: 10px;
+  padding: 12px;
   background: var(--bg-white);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
   transition: transform var(--transition-normal);
-}
-
-.music-player audio:hover {
-  transform: translateY(-3px);
+  display: block;
+  margin: 0 auto;
 }
 
 .surprise {
   text-align: center;
-  margin-bottom: 30px;
+  margin: 0 auto 40px;
   background: var(--bg-white);
   border-radius: var(--border-radius-md);
-  padding: 25px;
+  padding: 30px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-light);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  max-width: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.surprise::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 30px 30px 0;
+  border-color: transparent var(--primary-light) transparent transparent;
 }
 
 .surprise:hover {
@@ -207,24 +264,43 @@ body {
 }
 
 #surprise-btn {
-  padding: 12px 25px;
+  padding: 14px 30px;
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: #fff;
   border: none;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  transition: transform var(--transition-normal), background var(--transition-normal);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+#surprise-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  transition: all 0.4s ease;
+  z-index: -1;
 }
 
 #surprise-btn:hover {
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
   transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 112, 243, 0.4);
+}
+
+#surprise-btn:hover::before {
+  left: 0;
 }
 
 .video-container {
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .video-container iframe {
@@ -313,7 +389,7 @@ footer p {
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -324,7 +400,7 @@ footer p {
 @keyframes fadeInScale {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.92);
   }
   to {
     opacity: 1;
@@ -338,12 +414,12 @@ footer p {
   }
 
   .title-container h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     padding: 10px 15px;
   }
 
   .faq {
-    padding: 20px;
+    padding: 25px 20px;
   }
 
   .faq h2 {
@@ -355,22 +431,20 @@ footer p {
   }
 
   .tech-stack {
-    flex-direction: row;
-    justify-content: center;
-    gap: 10px;
+    gap: 15px;
   }
 
   .tech-item {
-    padding: 10px;
+    padding: 12px;
   }
 
   .tech-item img {
-    width: 60px;
-    height: 60px;
+    width: 65px;
+    height: 65px;
   }
 
   .music-player {
-    padding: 15px;
+    padding: 20px 15px;
   }
 
   .music-player h2 {
@@ -382,7 +456,12 @@ footer p {
   }
 
   .surprise {
-    padding: 15px;
+    padding: 20px 15px;
+  }
+
+  #surprise-btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
   }
 
   .video-container iframe {
