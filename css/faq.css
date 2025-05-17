@@ -1,4 +1,3 @@
-/* Global styles */
 * {
   margin: 0;
   padding: 0;
@@ -36,14 +35,13 @@ body {
   padding: 20px;
 }
 
-/* Header Section */
-header {
+.title-container {
   text-align: center;
   margin-bottom: 30px;
-  padding: 15px 0;
+  padding: 25px 0;
 }
 
-header h1 {
+.title-container h1 {
   font-size: 2.5rem;
   font-weight: 700;
   color: var(--primary);
@@ -52,37 +50,21 @@ header h1 {
   -webkit-text-fill-color: transparent;
   position: relative;
   display: inline-block;
-  padding: 8px 16px;
+  padding: 12px 20px;
   border-radius: var(--border-radius-sm);
   box-shadow: var(--shadow-sm);
   animation: fadeInScale 0.8s ease-out;
 }
 
-header h1::before {
-  content: '\f059'; /* Font Awesome question-circle icon */
-  font-family: 'Font Awesome 6 Free';
-  font-weight: 900;
-  position: absolute;
-  left: -25px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--primary-light);
-  font-size: 1.5rem;
-  opacity: 0;
-  animation: slideInIcon 0.5s ease forwards;
-  animation-delay: 0.3s;
-}
-
-header h1:hover {
+.title-container h1:hover {
   transform: scale(1.03);
   transition: transform var(--transition-normal);
 }
 
-/* FAQ Section */
 .faq {
   background: var(--bg-white);
   border-radius: var(--border-radius-md);
-  padding: 25px;
+  padding: 30px;
   margin-bottom: 30px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-light);
@@ -104,7 +86,7 @@ header h1:hover {
 }
 
 .faq h2::before {
-  content: '\f059'; /* Font Awesome question-circle icon */
+  content: '\f059';
   font-family: 'Font Awesome 6 Free';
   font-weight: 900;
   position: absolute;
@@ -120,18 +102,17 @@ header h1:hover {
 .faq p {
   font-size: 1rem;
   color: var(--text-light);
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   padding-left: 25px;
   opacity: 0;
   animation: fadeIn 0.5s ease forwards;
   animation-delay: 0.2s;
 }
 
-/* Tech Stack Section */
 .tech-stack {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 20px;
   margin-bottom: 30px;
   flex-wrap: wrap;
 }
@@ -139,13 +120,13 @@ header h1:hover {
 .tech-item {
   background: var(--bg-white);
   border-radius: var(--border-radius-sm);
-  padding: 10px;
+  padding: 15px;
   box-shadow: var(--shadow-sm);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 
 .tech-item:hover {
-  transform: translateY(-5px);
+  transform: translateY(-5px) scale(1.05);
   box-shadow: var(--shadow-md);
 }
 
@@ -155,13 +136,12 @@ header h1:hover {
   border-radius: 0.25rem;
 }
 
-/* Music Player Section */
 .music-player {
   text-align: center;
   margin-bottom: 30px;
   background: var(--bg-white);
   border-radius: var(--border-radius-md);
-  padding: 20px;
+  padding: 25px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-light);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
@@ -175,7 +155,7 @@ header h1:hover {
 .music-player h2 {
   font-size: 1.4rem;
   color: var(--primary);
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   position: relative;
   display: inline-block;
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
@@ -184,11 +164,13 @@ header h1:hover {
 }
 
 .music-player h2::before {
-  content: '\f001'; /* Font Awesome music icon */
+  content: '\f001';
   font-family: 'Font Awesome 6 Free';
   font-weight: 900;
   position: absolute;
   left: -25px;
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--primary);
   font-size: 1.2rem;
 }
@@ -197,7 +179,7 @@ header h1:hover {
   width: 100%;
   max-width: 500px;
   border-radius: var(--border-radius-sm);
-  padding: 8px;
+  padding: 10px;
   background: var(--bg-white);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
@@ -208,13 +190,12 @@ header h1:hover {
   transform: translateY(-3px);
 }
 
-/* Surprise Section */
 .surprise {
   text-align: center;
   margin-bottom: 30px;
   background: var(--bg-white);
   border-radius: var(--border-radius-md);
-  padding: 20px;
+  padding: 25px;
   box-shadow: var(--shadow-sm);
   border: 1px solid var(--border-light);
   transition: transform var(--transition-normal), box-shadow var(--transition-normal);
@@ -226,13 +207,13 @@ header h1:hover {
 }
 
 #surprise-btn {
-  padding: 10px 20px;
+  padding: 12px 25px;
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: #fff;
   border: none;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
   transition: transform var(--transition-normal), background var(--transition-normal);
 }
@@ -243,7 +224,7 @@ header h1:hover {
 }
 
 .video-container {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .video-container iframe {
@@ -255,7 +236,6 @@ header h1:hover {
   box-shadow: var(--shadow-sm);
 }
 
-/* Footer */
 footer {
   background: linear-gradient(135deg, #1a1a1a, #333);
   color: #fff;
@@ -330,16 +310,6 @@ footer p {
   opacity: 1;
 }
 
-/* Animations */
-@keyframes slideIn {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -348,15 +318,6 @@ footer p {
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes underline {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
   }
 }
 
@@ -371,25 +332,14 @@ footer p {
   }
 }
 
-@keyframes slideInIcon {
-  from {
-    opacity: 0;
-    transform: translateX(-8px) translateY(-50%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) translateY(-50%);
-  }
-}
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .container {
     padding: 15px;
   }
 
-  header h1 {
+  .title-container h1 {
     font-size: 2rem;
+    padding: 10px 15px;
   }
 
   .faq {
@@ -405,18 +355,18 @@ footer p {
   }
 
   .tech-stack {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
     gap: 10px;
   }
 
   .tech-item {
-    padding: 8px;
+    padding: 10px;
   }
 
   .tech-item img {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
   }
 
   .music-player {
@@ -428,7 +378,7 @@ footer p {
   }
 
   .music-player audio {
-    max-width: 280px;
+    max-width: 300px;
   }
 
   .surprise {
